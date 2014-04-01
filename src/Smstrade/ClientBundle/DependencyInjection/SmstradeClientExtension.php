@@ -20,7 +20,7 @@ class SmstradeClientExtension extends Extension {
         $processor = new Processor();
         $configuration = new Configuration($container->getParameter('kernel.debug'));
         $config = $processor->processConfiguration($configuration, $config);
-        
+
         $container->setParameter('smstrade_client.key', $config["key"]);
     }
 

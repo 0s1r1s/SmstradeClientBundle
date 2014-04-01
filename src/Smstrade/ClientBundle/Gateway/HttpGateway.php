@@ -73,6 +73,8 @@ class HttpGateway implements GatewayInterface {
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($ch, CURLOPT_TIMEOUT, 10);
         $response = curl_exec($ch);
+        if (FALSE === $response)
+            throw new \Exception(curl_error($ch), curl_errno($ch));
         curl_close($ch);
 
         return $response;

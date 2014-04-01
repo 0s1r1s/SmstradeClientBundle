@@ -23,8 +23,10 @@ class SMS implements SMSInterface {
     protected $getCount = false;
     
     protected $charset = null;
-    
+
     protected $sendDate = null;
+
+    protected $concat = null;
 
     /**
      * @return string
@@ -135,6 +137,17 @@ class SMS implements SMSInterface {
     public function setFrom($from) {
         $this->from = $from;
     }
+
+    /**
+     * @return boolean
+     */
+    public function getConcat() {
+        return $this->concat;
+    }
+
+    public function setConcat($concat) {
+        $this->concat = $concat;
+    }
     
     /**
      * @return array
@@ -165,6 +178,10 @@ class SMS implements SMSInterface {
         if($this->getSendDate()) {
             $datetime = $this->getSendDate();
             $parameter["sendtime"] = $datetime->getTimestamp();
+        }
+
+        if($this->getConcat()) {
+            $parameter['concat'] = "1";
         }
         
         return $parameter;
